@@ -1,0 +1,577 @@
+<html>
+    
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <style>
+            h1 {
+                background: black;
+                color: white;
+                padding: 0px;
+                margin: 0px;
+            }
+            .Main-body {
+                position:absolute;
+            }
+            .tag{
+                position: absolute;
+                height: 40px;
+            }
+            .btn {
+                position: absolute;
+            }
+            .AlltoLive {
+                position: absolute;
+            }
+            .BacktoLive {
+                position: absolute;
+                left: 1200px;
+            }
+            .note{
+                position: absolute;
+                width: 200px;
+                left :910px;
+            }
+
+            .Status-Live {
+                position: absolute;
+                left: 1300px;
+                top: 10px;
+            }
+            .Status-Live-content {
+                position: absolute;
+                left: 1344px;
+                top: 10px;
+                width: 160px;
+            }
+            .Choose {
+                position: absolute;
+                left: 625px;
+                top: 10px;
+            }
+            .Choose-content {
+                position: absolute;
+                left: 690px;
+                top: 10px;
+                width: 160px
+            }
+
+
+
+
+
+
+            .Upper {
+                position: absolute;
+                top: 40;
+
+            }
+            .col-Category {
+                position: absolute;
+                width: 275px;
+                height: 700px;
+            }
+            .col-hashtags {
+                position: absolute;
+                left: 275px;
+                height: 700px;
+                width: 275px;
+            }
+            .col-User {
+                position: absolute;
+                left: 825px;
+                height: 700px;
+                width: 275px;
+            }
+            .col-words {
+                position: absolute;
+                left: 550px;
+                height: 700px;
+                width: 275;
+            }
+            .col-live-post {
+                position: absolute;
+                left: 1100px;
+                height: 700px;
+                width: 275;
+            }
+            .line-chart {
+                position: absolute;
+                top: 850px;
+                left: 50px;
+                width: 1500px;
+                height: 200px;
+            }
+            .barChart {
+                height: 660px;
+                width: 275px;
+                position: absolute;
+                overflow: scroll;
+            }
+
+
+            .barRow{
+                fill:#eaeaea;
+            }
+            .bar{
+                fill:#eaeaea;
+            }
+            text.label{
+                fill: #777777;
+                color: #777777;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            text.category{
+                fill: #666666;
+                font-size: 14px;
+            }
+
+            .panel-heading {
+                text-align: center;
+            }
+
+            .live-title {
+                position: absolute;
+                border-bottom: solid;
+                border-top: solid;
+                border-width: thin;
+                height: 34px;
+                line-height: 34px;
+                padding: 0 10;
+                font-weight: bold;
+            }
+            .User{
+                position: absolute;
+                left: 5px;
+                margin-right: 0px;
+            }
+            .TextContent{
+                position: absolute;
+                left: 100px;
+                margin-right: 0px;
+            }
+            .live-title span:nth-child(1),
+            .live-list li p:nth-child(1){
+                width: 100px;
+            }
+            .live-title span:nth-child(2),
+            .live-list li p:nth-child(2){
+                width: 155px;
+                margin-right: 0px;
+            }
+            .live{
+                position:absolute;
+                overflow: hidden;
+                height: 615px;
+                top: 34px;
+                
+            }
+            .live-list{
+                border-bottom: solid;
+                border-width: thin;
+                width:100%;
+                left:0;
+                top:0;
+                color:#000;
+                margin:0;
+                padding:0;
+            }
+            .live-list li {
+                line-height:20px;
+                list-style:none;
+                margin:0;
+                padding:0 10px;
+                display: flex;
+                flex-direction: row;
+            }
+            .live-list li p {
+
+                margin: 0px;
+                overflow:visible;
+                
+            }
+            .live-list li p.userName {
+                word-break:break-all; 
+            }
+            .odd{
+                background: rgba(51,79,109,.3);
+            }
+            .even{
+                background: rgba(51,79,109,.1);
+            }
+            
+            
+            .live-container{
+                padding: 0;
+                margin: 0;
+                position: absolute;
+            }
+            
+            li span{
+                background-color:#FF9;
+                color:#555;
+            }
+
+            .hover-line {
+                stroke: #6E7B8B;
+            }
+            path {
+                stroke: steelblue;
+                stroke-width: 1;
+                fill: none;
+            }
+            .x-axis,
+            .y-axis {
+                shape-rendering: crispEdges;
+            }
+
+
+
+            .tweets{
+                height: 300px;
+                width: 250px;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+            }
+            .tweets-panel {
+                height: 280px;
+                width: 250px;
+                padding: 0px;
+                margin: 0px;
+                overflow: scroll;
+            }
+            .tweets-List {
+                padding: 0px;
+                margin: 0px;
+            }
+            #tweets-List-element {
+                list-style: none;
+                width: 250px;
+                margin: 0px;
+                padding: 0px;
+                line-height: 15px;
+            }
+            .close-button {
+                font-size: 7;
+            }
+
+            .history{
+                position: absolute;
+                width: 900px;
+                height: 600px;
+                padding: 0px;
+                opacity: 0;
+                top: -600px;
+
+            }
+            .content {
+                position: absolute;
+                padding: 0px;
+                height: 550px;
+                width: 900px;
+            }
+            .history-group {
+                margin: 0px;
+                padding: 0px;
+                position: absolute;
+                width : 900px;
+                height: 400px;
+            }
+            
+            .history-hashtag {
+                margin: 0px;
+                padding: 0px;
+                position: absolute;
+                width : 450px;
+                height: 150px;
+                top: 400px;
+                border-style: solid;
+                border-width: thin;
+            }
+            .history-user {
+                margin: 0px;
+                padding: 0px;
+                position: absolute;
+                width : 450px;
+                height: 150px;
+                top: 400px;
+                left: 450px;
+                border-style: solid;
+                border-width: thin;
+            }
+            .history-tag {
+                position: absolute;
+                top: 10px;
+                left: 100px;
+            }
+            .history-Women {
+                position: absolute;
+                width: 300px;
+                height: 200px;
+            }
+            .history-Black {
+                position: absolute;
+                width: 300px;
+                height: 200px;
+                left: 300px;
+            }
+            .history-Homosexual {
+                position: absolute;
+                width: 300px;
+                height: 200px;
+                left: 600px;
+            }
+            .history-Different_regions {
+                position: absolute;
+                width: 300px;
+                height: 200px;
+                top: 200px;
+            }
+            .history-Body_form {
+                position: absolute;
+                width: 300px;
+                height: 200px;
+                top:200px;
+                left:300px;
+            }
+            .history-General {
+                position: absolute;
+                width: 300px;
+                height: 200px;
+                top:200px;
+                left:600px;
+            }
+            .history-bar {
+              fill: steelblue;
+            }
+
+            .history-bar:hover {
+              fill: brown;
+            }
+
+            .history-axis {
+              font: 10px sans-serif;
+            }
+
+            .history-axis path,
+            .history-axis line {
+              fill: none;
+              stroke: #000;
+              shape-rendering: crispEdges;
+            }
+
+            .history-x.axis path {
+              display: none;
+            }
+
+            .closeBtn {
+                position: absolute;
+                
+            }
+
+
+
+            .setTime {
+                position: absolute;
+                top: 800px;
+                left : 50px;
+                width: 500px;
+            }
+            .inputText {
+                width: 50px;
+                position: absolute;
+                top:0px;
+            }
+            #smallInterval {
+                left: 130;
+            }
+            .textForm {
+                position: absolute;
+            }
+            .min {
+                top: 0px;
+                left: 180px;
+            }
+            .big {
+                top: 26px;
+            }
+            #bigInterval {
+                top: 24px;
+                left: 170;
+            }
+            .hour {
+                top: 26px;
+                left: 220px;
+            }
+            .set {
+                position: absolute;
+                top: 18px;
+                left: 300px
+            }
+            
+
+        </style>
+    </head>
+    
+    <body>
+        <h1>Twitter Verbal-Abuse</h1>
+        <div class="Main-body" id = "main">
+            <div class = "tag">
+                    <button type = "button" class="BackToLive btn btn-warning" onclick = "backToLive();">BackToLive</button>
+                    <text class = "Choose">Choose:</text>
+                    <text class = "Choose-content">bitch</text>  
+                    <text class = "Status-Live">Status:</text>
+                    <text class = "Status-Live-content"></text>
+            </div>
+            <div class = "Upper">
+                <div class = "col-Category panel panel-default">
+                    <div class = "panel-heading">
+                        Category
+                    </div>
+                    <div class = "panel-body barChart" id = "AbusiveChart">
+                    </div>
+                </div>
+                <div class = "col-hashtags panel panel-default">
+                    <div class = "panel-heading">
+                        Hashtags
+                    </div>
+                    <div class = "panel-body barChart" id = "HashtagChart">
+                    </div>
+                </div>
+                <div class = "col-words panel panel-default">
+                    <div class = "panel-heading">
+                        words
+                    </div>
+                    <div class = "panel-body barChart" id = "KeyWordChart">
+                    </div>
+                </div>
+                <div class = "col-User panel panel-default">
+                    <div class = "panel-heading">
+                        Users
+                    </div>
+                    <div class = "panel-body barChart" id = "UserChart">
+                    </div>
+                </div>
+                <div class = "col-live-post panel panel-default">
+                    <div class = "panel-heading">
+                        Live-Post
+                    </div>
+                    <div class = "panel-body live-container">
+                            <div class="live-title">
+                                <span class = "User">User</span>
+                                <span class = "TextContent">Text</span>
+                            </div>
+                            <div class="live" id = "container">
+                                <ul class="live-list" id = "liveList">
+                                    <li class="odd">
+                                        <p class = "userName"></p>
+                                        <p></p>
+                                    </li>
+                                </ul>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class = "lower">
+                <div class = "setTime">
+                    <div>Store the data every</div>
+                    <input type="text" id = "smallInterval" class = "inputText">
+                    <div class = "min textForm"> minutes</div>
+                    <div class = "big textForm"> Show the data from now to </div>
+                    <input type = "text" id = "bigInterval" class = "inputText">
+                    <div class = "hour textForm">hours ago</div>
+                    <button class = "set btn btn-warning" onclick = "setTime();">Set</button>
+                </div>
+                <div class = "line-chart" id = "lineChart">
+                </div>
+            </div>
+
+
+             <div class = "history panel panel-default" id = "history">
+            <button class = "closeBtn btn btn-warning" onclick = "closeHistory();">close</button>
+            <div class = "panel-heading" id = "history-title">
+            </div>
+            <div class = "panel-body content">
+                <div class = "history-group">
+                    <div class = "history-Women" id = "history-Women"><text class = "history-tag">Groups-Women</text></div>
+                    <div class = "history-Black" id = "history-Black"><text class = "history-tag">Groups-Black</text></div>
+                    <div class = "history-Homosexual" id = "history-Homosexual"><text class = "history-tag">Groups-Homosexual</text></div>
+                    <div class = "history-Different_regions" id = "history-Different_regions"><text class = "history-tag">Groups-regions</text></div>
+                    <div class = "history-Body_form" id = "history-Body_form"><text class = "history-tag">Groups-body</text></div>
+                    <div class = "history-General" id = "history-General"><text class = "history-tag">Groups-genral</text></div>
+                </div>
+                <div class = "history-hashtag" id = "history-hashtag">
+                    <text class = "history-tag">Hashtags</text>
+                </div>
+                <div class = "history-user" id = "history-user">
+                    <text class = "history-tag">Users</text>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+    </body>
+    
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    <script type="text/javascript"  src="/javascripts/AbusivebarChartUpdate.js"></script>
+    <script type="text/javascript"  src="/javascripts/updateLive.js"></script>
+    <script type="text/javascript"  src="/javascripts/updateLineChart.js"></script>
+    <script type="text/javascript"  src="/javascripts/updatingBarChartKeyWord.js"></script>
+    <script type="text/javascript"  src="/javascripts/updatingBarChartHash.js"></script>
+    <script type="text/javascript"  src="/javascripts/updatingBarChartUser.js"></script>
+    <script>
+        var updateL;
+        var lineCharUpdate;
+        $(document).ready(function() {
+            $( "#history" ).draggable();
+            var keyWordChartUpdate = new keyWordBarChartUpdate();
+            keyWordChartUpdate.start("#KeyWordChart", 20, 1.5, 700);
+            var abusiveChartUpdate = new AbusivebarChartUpdate();
+            abusiveChartUpdate.start("#AbusiveChart", 2.5, 700, keyWordChartUpdate);
+            var HashtagChartUpdate = new HashBarChartUpdate();
+            HashtagChartUpdate.start("#HashtagChart", 15, 1, 700);
+            var UserChartUpdate = new UserBarChartUpdate();
+            UserChartUpdate.start("#UserChart", 10, 1, 700);
+
+            lineCharUpdate = new updateLineChart();
+            lineCharUpdate.updateLine("#lineChart", 1400, 200, 50, 800);
+
+
+
+            updateL = new updateLive();
+            updateL.update();
+        }); 
+
+        function backToLive() {
+            updateL.backToLive();
+        }
+        function closeHistory() {
+            document.getElementById("history").style.opacity = 0;
+            document.getElementById("history").style.top = "-600px";
+        }
+        function setTime() {
+            var smallInterval = document.getElementById("smallInterval").value;
+            var bigInterval = document.getElementById("bigInterval").value;
+            var message = {};
+            message.small = smallInterval;
+            message.big = bigInterval;
+            $.ajax({
+            type: 'POST',
+            data: message,
+            url: '/setTimeButton',
+            complete: function(data) {
+          
+              }
+          });
+            setTimeout(function() {
+                lineCharUpdate.reSet(bigInterval * 60 / smallInterval + 1);
+            }, 500);
+        }
+    </script>
+</html>

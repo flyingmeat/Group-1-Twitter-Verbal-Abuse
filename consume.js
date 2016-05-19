@@ -5,9 +5,11 @@ var mysql = require('mysql');
 var fs = require('fs');
 var path = require('path');
 var updateKeyword = require('./keywordUpdate.js')
+var init = require('./init.js');
+var elasticSearch = require('./elasticSearch.js');
 
 var jsonLive = {};
-
+var isInit = false;
 
 
 process.on('uncaughtException', function(err) {
@@ -45,10 +47,11 @@ function parseTwitterDate($stamp) {
 function parseTweet(tweet) {
 
   if ( tweet.lang == 'en' )  { // sentiment module only works on English
-
   var tweet_id = tweet.id_str;
+
   var tweet_text = tweet.text;
   var created_at = parseTwitterDate(tweet.created_at);
+
   var user_id = tweet.user.id_str;
   var screen_name = tweet.user.screen_name;
   var name = tweet.user.name;
@@ -74,6 +77,18 @@ function parseTweet(tweet) {
   client.query( 'DELETE FROM tweet WHERE created_at <  (NOW() + interval 24 hour )' );
 */
 //-------------------------------------------------------------//
+  elasticSearch.update(tweet);
+  if (!isInit) {
+    var step = 60;
+    var startDate = new Date(Date.parse(tweet.created_at));
+    var endDate = new Date(Date.parse(tweet.created_at));
+    startDate.setSeconds(startDate.getSeconds() - 60);
+    endDate.setSeconds(endDate.getSeconds() - 60);
+    startDate.setMinutes(startDate.getMinutes() - 30);
+    init.init(startDate.toString(), endDate.toString(), step, 30);
+    elasticSearch.updateJson();
+    isInit = true;
+  }
   updateKeyword.keywordUpdate(tweet_text);
   updateLive(tweet);
 
@@ -83,11 +98,12 @@ function parseTweet(tweet) {
 
 
 function updateLive(data) {
-  //console.log(data.user);
   jsonLive = JSON.stringify({
     user : data.user.name,
-    text : data.text
+    text : data.text,
+    keyWordSet : updateKeyword.keywordSet
   });
+
   exports.jsonLive = jsonLive;
 }
 
@@ -98,7 +114,6 @@ function getTweets() {
      function(stream) {
 //  t.stream('statuses/sample', function(stream) {
     stream.on('data', function (tweet) {
-      //console.log(tweet.text);
       parseTweet(tweet);
     });
     stream.on('error', function(tweet) {
@@ -115,3 +130,4 @@ function getTweets() {
 
 exports.connectSQL = connectSQL;
 exports.getTweets = getTweets;
+

@@ -1,7 +1,17 @@
-var fs = require('fs');
-var path = require('path');
-var groupUpdate = require('./groupUpdate.js');
-var jsonKey = JSON.stringify(
+
+var groupTotal = JSON.stringify(
+	[
+		{"Group": "Women", "value": 0},
+		{"Group": "Black", "value": 0},
+		{"Group": "Homosexual", "value": 0},
+		{"Group": "Different_regions", "value": 0},
+		{"Group": "Body_form", "value": 0},
+		{"Group": "General", "value": 0}
+	]
+);
+
+
+var historyKey = JSON.stringify(
 	[	
 		{
 			"Group" : "Women", 
@@ -98,40 +108,51 @@ var jsonKey = JSON.stringify(
 	]
 	);
 
-function keywordUpdate(/* text content*/ text) {
-	var words = [];
-	var keywordSet = [];
-	var json = JSON.parse(jsonKey);
 
-	var lowerText = text.toLowerCase();
-
-	for (var i = 0; i < json.length; i++) {
-		for (var j = 1; j < json[i]["set"].length; j++) {
-			if (lowerText.indexOf(json[i]["set"][j]["key"]) > -1) {
-				json[i]["set"][j]["value"]++;
-				json[i]["set"][0]["value"]++;
-				keywordSet.push(json[i]["set"][j]["key"]);
-			}
-		}
+function updateGroupTotal(data) {
+	historyAbusiveWords(data);
+	var keyData = JSON.parse(data);
+	var json = JSON.parse(groupTotal);
+	for (var i = 0; i < keyData.length; i++) {
+		json[i]["value"] += keyData[i]["set"][0]["value"];
 	}
-	jsonKey = JSON.stringify(json);
-	exports.jsonKey = jsonKey;
-	exports.keywordSet = keywordSet;
+	groupTotal = JSON.stringify(json);
+	exports.groupTotal = groupTotal;
 }
 
-function setZero() {
-	var json = JSON.parse(jsonKey);
+function historyAbusiveWords(data) {
+	var keyData = JSON.parse(data);
+	var json = JSON.parse(historyKey);
+	for (var i = 0; i < keyData.length; i++) {
+		for (var j = 0; j < keyData[i]["set"].length; j++) {
+			json[i]["set"][j]["value"] += keyData[i]["set"][j]["value"];
+		}
+	}
+	historyKey = JSON.stringify(json);
+	exports.historyKey = historyKey;
+}
+
+
+function setHistoryGroupZero() {
+	var json = JSON.parse(historyKey);
 	for (var i = 0; i < json.length; i++) {
 		for (var j = 0; j < json[i]["set"].length; j++) {
 			json[i]["set"][j]["value"] = 0;
 		}
 	}
-	jsonKey = JSON.stringify(json);
-	exports.jsonKey = jsonKey;
+	historyKey = JSON.stringify(json);
 }
 
 
+function setGroupZero() {
+	var json = JSON.parse(groupTotal);
+	for (var i = 0; i < json.length; i++) {
+		json[i]["value"] = 0;
+	}
+	groupTotal = JSON.stringify(json);
+}
 
-exports.jsonKey = jsonKey;
-exports.keywordUpdate = keywordUpdate;
-exports.setZero = setZero;
+exports.setHistoryGroupZero = setHistoryGroupZero;
+exports.historyAbusiveWords = historyAbusiveWords;
+exports.updateGroupTotal = updateGroupTotal;
+exports.setGroupZero = setGroupZero;
