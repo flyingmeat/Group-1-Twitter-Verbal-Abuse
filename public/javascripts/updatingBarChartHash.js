@@ -127,7 +127,18 @@ function HashBarChartUpdate(){
 	chartRow.transition()
 		.delay(delay)
 		.duration(400)
-		.attr("transform", function(d){ return "translate(0," + y(d.key) + ")"; });
+		.attr("transform", function(d){ return "translate(0," + y(d.key) + ")"; }); 
+
+    margin = null;
+    width = null;
+    height = null;
+    categoryIndent = null;
+    svg = null;
+    x = null;
+    y = null;
+    barMax = null;
+    chartRow = null;
+    newRow = null;
 
     };
     
@@ -151,6 +162,7 @@ function HashBarChartUpdate(){
                     var newData = data.responseJSON;
                     newData = formatData(newData, number);
                     callback(settings,newData);
+                    newData = null;
                 }
                 
             }

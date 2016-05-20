@@ -148,6 +148,7 @@ function barChartUpdate_Group(){
                     var newData = data.responseJSON;
                     newData = formatData(newData, number);
                     callback(settings,newData);
+                    newData = null;
                 }
                 
             }

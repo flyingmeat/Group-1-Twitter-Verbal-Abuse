@@ -53,6 +53,8 @@ function init(startDate, endDate, rawStep, bigTimeInterval) {
 		updateGroup.setHistoryGroupZero();
 		updateGroup.setGroupZero();
 		elasticSearch.deleteIndex();
+		var endDate = null;
+		var endTime = null;
 	}, step * 1000);
 }
 

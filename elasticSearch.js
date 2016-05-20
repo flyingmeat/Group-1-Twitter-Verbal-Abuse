@@ -88,10 +88,13 @@ function searchKeyWord(dataSet) {
 			var key = hits[i].key;
 			var value = hits[i].score / biggest;
 			json.push({key: key, value: value});
+			key = null;
+			value = null;
 		}
 		relativekeyWord = JSON.stringify(json);
 	  	exports.relativekeyWord = relativekeyWord;
-
+	  	json = null;
+	  	hits = null;
 	}, function (err) {
 	    console.trace(err.message);
 	});
@@ -132,7 +135,8 @@ function getTopHash() {
 		}
 		topHash = JSON.stringify(json);
 		exports.topHash = topHash;
-
+		hits = null;
+		json = null;
 
 	}, function (err) {
 	    console.trace(err.message);
@@ -176,6 +180,7 @@ function storeUser(tweet){
                 contentlength: result.length
               }
           }});
+        result = null;
       });
     } else {
       client.index({
@@ -217,6 +222,8 @@ function getTopUser() {
 	    }
 	    topUser = JSON.stringify(json);
 	    exports.topUser = topUser;
+	    hits = null;
+	    json = null;
   	}, function (err) {
 	    console.trace(err.message);
 	});
@@ -252,9 +259,7 @@ function getHistory(dateTime) {
       type:'BigInterval',
       id: dateTime
     }, function(error, resp) {
-    	console.log(resp);
     	history = formatJson(resp["_source"]);
-    	console.log(history);
     	exports.history = history;
     });
 }

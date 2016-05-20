@@ -131,6 +131,19 @@ function keyWordBarChartUpdate(){
 		.duration(400)
 		.attr("transform", function(d){ return "translate(0," + y(d.key) + ")"; });
 
+
+
+    margin = null;
+    width = null;
+    height = null;
+    categoryIndent = null;
+    svg = null;
+    x = null;
+    y = null;
+    barMax = null;
+    chartRow = null;
+    newRow = null;
+
     };
     
     var pullData = function(settings,callback, number){
@@ -155,6 +168,7 @@ function keyWordBarChartUpdate(){
                         newData = formatData(newData, number);
                         callback(settings,newData);
                     }
+                    newData = null;
                 }
                 
             }

@@ -281,9 +281,10 @@ function AbusivebarChartUpdate() {
                     }
                 });
                 renderChart(settings, newData);
+                change = null;
             })
         }
-    
+        
         
     };
         
@@ -314,6 +315,7 @@ function AbusivebarChartUpdate() {
                     var newData = data.responseJSON;
                     //newData = formatData(newData);
                     callback(settings,newData);
+                    newData = null;
                 }
                 
             }
@@ -369,7 +371,6 @@ function AbusivebarChartUpdate() {
                 if (data.statusText == "OK") {
                     var newData = data.responseJSON;
                     keyWordUpdate.redrawNow(newData)
-                    console.log(newData);
                 }
                 
             }
