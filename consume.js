@@ -82,10 +82,10 @@ function parseTweet(tweet) {
     var step = 60;
     var startDate = new Date(Date.parse(tweet.created_at));
     var endDate = new Date(Date.parse(tweet.created_at));
-    startDate.setSeconds(startDate.getSeconds() - 60);
-    endDate.setSeconds(endDate.getSeconds() - 60);
-    startDate.setMinutes(startDate.getMinutes() - 30);
-    init.init(startDate.toString(), endDate.toString(), step, 30);
+    startDate.setSeconds(startDate.getSeconds() - step);
+    endDate.setSeconds(endDate.getSeconds() - step);
+    startDate.setMinutes(startDate.getMinutes() - 60);
+    init.init(startDate.toString(), endDate.toString(), step, 60);
     elasticSearch.updateJson();
     isInit = true;
   }

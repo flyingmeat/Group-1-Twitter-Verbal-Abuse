@@ -30,9 +30,11 @@ process.on('uncaughtException', function(err) {
   console.log(err);
 });
 
+
+consume.getTweets();
+
 app.get('/', function(req, res){
 	consume.connectSQL();
-	consume.getTweets();
   	res.render('TwitterTest2', {});
 });
 

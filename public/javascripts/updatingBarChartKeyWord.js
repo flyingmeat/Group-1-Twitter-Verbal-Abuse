@@ -151,8 +151,10 @@ function keyWordBarChartUpdate(){
                 //jsonData = data.responseText;
                 if (data.statusText == "OK") {
                     var newData = data.responseJSON;
-                    newData = formatData(newData, number);
-                    callback(settings,newData);
+                    if (newData != undefined || newData.length != 0) {
+                        newData = formatData(newData, number);
+                        callback(settings,newData);
+                    }
                 }
                 
             }
