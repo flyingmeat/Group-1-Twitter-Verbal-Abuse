@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var groupUpdate = require('./groupUpdate.js');
+var keywordSet = [];
 var jsonKey = JSON.stringify(
 	[	
 		{
@@ -100,7 +101,7 @@ var jsonKey = JSON.stringify(
 
 function keywordUpdate(/* text content*/ text) {
 	var words = [];
-	var keywordSet = [];
+	keywordSet = [];
 	var json = JSON.parse(jsonKey);
 
 	var lowerText = text.toLowerCase();
@@ -128,6 +129,7 @@ function setZero() {
 	}
 	jsonKey = JSON.stringify(json);
 	exports.jsonKey = jsonKey;
+	json = null;
 }
 
 

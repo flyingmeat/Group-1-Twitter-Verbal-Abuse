@@ -31,9 +31,10 @@ var groupLine = JSON.stringify(
 		    ]}
 );
 var step;
-
-function init(startDate, endDate, rawStep, bigTimeInterval) {
+var bigTimeInterval;
+function init(startDate, endDate, rawStep, newbigTimeInterval) {
 	step = rawStep;
+	bigTimeInterval = newbigTimeInterval;
 	var json = JSON.parse(groupLine);
 	json["start"] = startDate;
 	json["end"] = endDate;
@@ -43,11 +44,11 @@ function init(startDate, endDate, rawStep, bigTimeInterval) {
 	}
 	groupLine = JSON.stringify(json);
 	exports.groupLine = groupLine;
-	
+	json = null;
 	setInterval(function() {
 		var endDate = pushNewData();
 		var endTime = new Date(Date.parse(endDate.toString())); 
-		elasticSearch.updateBigInterval(endTime.getTime(), updateGroup.historyKey, elasticSearch.topHash, elasticSearch.topUser, step);
+		elasticSearch.updateBigInterval(endTime.getTime(), updateGroup.historyKey, elasticSearch.topHash, elasticSearch.topUser, bigTimeInterval);
 
 
 		updateGroup.setHistoryGroupZero();
@@ -91,16 +92,16 @@ function setSmallTime(time) {
 }
 
 
-function setTimeInterval(newStep, bigTimeInterval) {
+function setTimeInterval(newStep, newbigTimeInterval) {
 	if (newStep == undefined || bigTimeInterval == undefined) {
 		return;
 	}
 	step = newStep * 60;
+	bigTimeInterval = newbigTimeInterval;
 	var number = bigTimeInterval * 3600 / step + 1;
 	var json = JSON.parse(groupLine);
 	json["step"] = step;
 	var endDate = new Date(Date.parse(json["end"]));
-	console.log(number);
 	var newStartDate = new Date(Date.parse(json["end"]));
 	newStartDate.setHours(newStartDate.getHours() - bigTimeInterval);
 	json["start"] = newStartDate.toString();
@@ -112,9 +113,7 @@ function setTimeInterval(newStep, bigTimeInterval) {
 		while (json["Groups"][i]["data"].length > number) {
 			json["Groups"][i]["data"].shift();
 		}
-		console.log(json["Groups"][i]["data"].length);
 	}
-	console.log(json);
 	groupLine = JSON.stringify(json);
 	exports.groupLine = groupLine;
 }

@@ -285,7 +285,21 @@ function AbusivebarChartUpdate() {
             })
         }
         
-        
+        margin = null;
+        width = null;
+        height = null;
+        categoryIndent = null;
+        svg = null;
+        x = null;
+        y = null;
+        barMax = null;
+        times = null;
+        yMap = null;
+        eachGroup = null;
+        y1 = null;
+        group = null;
+        chartGroup = null;
+        chartRow = null;
     };
         
     var formatData = function(newData) {

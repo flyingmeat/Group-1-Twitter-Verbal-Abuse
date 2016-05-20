@@ -231,9 +231,9 @@ function getTopUser() {
 
 
 
-function updateBigInterval(dateTime, abusiveWord, topHashtag, topUser, step) {
+function updateBigInterval(dateTime, abusiveWord, topHashtag, topUser, bigInterval) {
 	var deleteDate = new Date(Date.parse(dateTime));
-	deleteDate.setSeconds(deleteDate.getSeconds() - step * 30);
+	deleteDate.setSeconds(deleteDate.getSeconds() - bigInterval * 60);
 
 
 	client.index({
