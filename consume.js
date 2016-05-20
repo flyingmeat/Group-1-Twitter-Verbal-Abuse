@@ -79,13 +79,13 @@ function parseTweet(tweet) {
 //-------------------------------------------------------------//
   elasticSearch.update(tweet);
   if (!isInit) {
-    var step = 60;
+    var step = 60 * 10;
     var startDate = new Date(Date.parse(tweet.created_at));
     var endDate = new Date(Date.parse(tweet.created_at));
     startDate.setSeconds(startDate.getSeconds() - step);
     endDate.setSeconds(endDate.getSeconds() - step);
-    startDate.setMinutes(startDate.getMinutes() - 60);
-    init.init(startDate.toString(), endDate.toString(), step, 60);
+    startDate.setMinutes(startDate.getMinutes() - 120);
+    init.init(startDate.toString(), endDate.toString(), step, 120);
     elasticSearch.updateJson();
     isInit = true;
   }
