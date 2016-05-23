@@ -33,16 +33,6 @@ function update(tweet) {
 	});
 	updateHashtag(tweet);
 	storeUser(tweet);
-	try {
-          global.gc();
-        } catch (e) {
-          console.log("You must run program with 'node --expose-gc index.js' or 'npm start'");
-          process.exit();
-        }
- 
-        //2. Output Heap stats
-        var heapUsed = process.memoryUsage().heapUsed;
-        console.log("Program update is using " + heapUsed + " bytes of Heap.");
 }
 
 function updateHashtag(tweet){
@@ -146,19 +136,6 @@ function getTopHash() {
 		}
 		topHash = JSON.stringify(json);
 		exports.topHash = topHash;
-
-		try {
-          global.gc();
-        } catch (e) {
-          console.log("You must run program with 'node --expose-gc index.js' or 'npm start'");
-          process.exit();
-        }
- 
-        //2. Output Heap stats
-        var heapUsed = process.memoryUsage().heapUsed;
-        console.log("Program hash is using " + heapUsed + " bytes of Heap.");
-
-
 		hits = null;
 		json = null;
 
@@ -245,20 +222,6 @@ function getTopUser() {
 	      json.push({key: user, value: number, tweets: tweets});
 	    }
 	    topUser = JSON.stringify(json);
-
-	    try {
-          global.gc();
-        } catch (e) {
-          console.log("You must run program with 'node --expose-gc index.js' or 'npm start'");
-          process.exit();
-        }
- 
-        //2. Output Heap stats
-        var heapUsed = process.memoryUsage().heapUsed;
-        console.log("Program user is using " + heapUsed + " bytes of Heap.");
-
-
-
 	    exports.topUser = topUser;
 	    hits = null;
 	    json = null;
@@ -333,6 +296,7 @@ function formatJson(data) {
 
 
 function deleteIndex(){
+	
   client.indices.delete({
     index: 'my_index',
     body: {
