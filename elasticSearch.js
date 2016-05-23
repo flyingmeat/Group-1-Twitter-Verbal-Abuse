@@ -33,6 +33,16 @@ function update(tweet) {
 	});
 	updateHashtag(tweet);
 	storeUser(tweet);
+	try {
+          global.gc();
+        } catch (e) {
+          console.log("You must run program with 'node --expose-gc index.js' or 'npm start'");
+          process.exit();
+        }
+ 
+        //2. Output Heap stats
+        var heapUsed = process.memoryUsage().heapUsed;
+        console.log("Program update is using " + heapUsed + " bytes of Heap.");
 }
 
 function updateHashtag(tweet){
@@ -136,6 +146,19 @@ function getTopHash() {
 		}
 		topHash = JSON.stringify(json);
 		exports.topHash = topHash;
+
+		try {
+          global.gc();
+        } catch (e) {
+          console.log("You must run program with 'node --expose-gc index.js' or 'npm start'");
+          process.exit();
+        }
+ 
+        //2. Output Heap stats
+        var heapUsed = process.memoryUsage().heapUsed;
+        console.log("Program hash is using " + heapUsed + " bytes of Heap.");
+
+
 		hits = null;
 		json = null;
 
@@ -222,6 +245,20 @@ function getTopUser() {
 	      json.push({key: user, value: number, tweets: tweets});
 	    }
 	    topUser = JSON.stringify(json);
+
+	    try {
+          global.gc();
+        } catch (e) {
+          console.log("You must run program with 'node --expose-gc index.js' or 'npm start'");
+          process.exit();
+        }
+ 
+        //2. Output Heap stats
+        var heapUsed = process.memoryUsage().heapUsed;
+        console.log("Program user is using " + heapUsed + " bytes of Heap.");
+
+
+
 	    exports.topUser = topUser;
 	    hits = null;
 	    json = null;
@@ -247,11 +284,22 @@ function updateBigInterval(dateTime, abusiveWord, topHashtag, topUser, bigInterv
 		  topUser:topUser                                    //这里换成这一分钟之内统计的结果的json
 		}
 	});
-	client.delete({
-		index:'another_index',
+
+
+	client.exists({
+    	index:'another_index',
 		type:'BigInterval',
-		id: deleteDate.getTime() //这里是分钟数减去20分钟，意思就是删除20min以前的数据
-	});
+    	id: deleteDate.getTime()
+  	}, function (error, exists) {
+  		if (exists == true) {
+  			client.delete({
+				index:'another_index',
+				type:'BigInterval',
+				id: deleteDate.getTime() //这里是分钟数减去20分钟，意思就是删除20min以前的数据
+			});
+  		}
+  	});
+
 }
 
 function getHistory(dateTime) {
