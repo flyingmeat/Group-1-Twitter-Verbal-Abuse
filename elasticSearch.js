@@ -5,7 +5,8 @@ var history = JSON.stringify({});
 var keyWordSet = ["bitch"];
 var elasticsearch = require('elasticsearch');
 var client = new elasticsearch.Client({
-  host: 'https://search-myelasticsearch-imrb3khz2ybmb4m3nazqmphv4i.us-west-2.es.amazonaws.com/'
+  	host: 'https://search-visualization-23mgycqpw56julziwgzw34ke6i.us-west-2.es.amazonaws.com/'
+  //host: 'https://search-myelasticsearch-imrb3khz2ybmb4m3nazqmphv4i.us-west-2.es.amazonaws.com/'
   //log: 'trace'
 });
 
