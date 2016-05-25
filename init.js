@@ -62,7 +62,7 @@ function init(startDate, endDate, rawStep, newbigTimeInterval) {
 		updateGroup.updateGroupTotal(keywords.jsonKey);
     	keywords.setZero();
     	console.log(keywords.jsonKey);
-	}, 5000);
+	}, 15000);
 }
 
 function initData(number) {
