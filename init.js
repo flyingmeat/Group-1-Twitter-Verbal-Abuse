@@ -61,7 +61,6 @@ function init(startDate, endDate, rawStep, newbigTimeInterval) {
 	setInterval(function() {
 		updateGroup.updateGroupTotal(keywords.jsonKey);
     	keywords.setZero();
-    	console.log(keywords.jsonKey);
 	}, 15000);
 }
 
