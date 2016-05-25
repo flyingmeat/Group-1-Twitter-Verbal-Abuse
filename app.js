@@ -44,8 +44,6 @@ app.get('/updateLive', function(req, res, next) {
 
 app.get('/updateKey', function(req, res, next) {
 	res.send(keywords.jsonKey);
-    updateGroupTotal.updateGroupTotal(keywords.jsonKey);
-    keywords.setZero();
 });
 
 app.get('/updateLine', function(req, res, next) {

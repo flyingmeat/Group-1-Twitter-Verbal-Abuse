@@ -1,5 +1,6 @@
 var updateGroup = require('./updateGroupTotal.js');
 var elasticSearch = require('./elasticSearch.js');
+var keywords = require('./keywordUpdate.js');
 var groupLine = JSON.stringify(
 		{
 			"start" : 0, "end" : 0, "step" : 0,
@@ -57,6 +58,10 @@ function init(startDate, endDate, rawStep, newbigTimeInterval) {
 		var endDate = null;
 		var endTime = null;
 	}, step * 1000);
+	setInterval(function() {
+		updateGroupTotal.updateGroupTotal(keywords.jsonKey);
+    	keywords.setZero();
+	}, 5000);
 }
 
 function initData(number) {
