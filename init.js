@@ -59,8 +59,9 @@ function init(startDate, endDate, rawStep, newbigTimeInterval) {
 		var endTime = null;
 	}, step * 1000);
 	setInterval(function() {
-		updateGroupTotal.updateGroupTotal(keywords.jsonKey);
+		updateGroup.updateGroupTotal(keywords.jsonKey);
     	keywords.setZero();
+    	console.log(keywords.jsonKey);
 	}, 5000);
 }
 
